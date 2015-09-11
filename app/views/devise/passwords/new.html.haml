@@ -1,0 +1,18 @@
+.container
+  .row
+    .col-md-6.col-md-offset-3
+      .panel.panel-default
+        .panel-heading
+          %span.glyphicon.glyphicon-lock
+          Sign Up
+        .panel-body
+          = form_for(resource, as: resource_name,:html => {:role => "form",:method=>"post"}, url: password_path(resource_name)) do |f|
+            = devise_error_messages!
+            .form-group
+              %label{:for => "inputEmail"} Email
+              = f.email_field :email, autofocus: true,:class=>"form-control"
+            .form-group
+              %button.btn.btn-primary{:type => "submit"} Send me reset password instructions
+        .panel-footer
+          Already Member?
+          = render "devise/shared/links"
