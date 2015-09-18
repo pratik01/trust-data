@@ -1,8 +1,23 @@
 TrustData::Application.routes.draw do
-  get "users/index"
+
   devise_for :users
-  root "home#index"
   TheRoleManagementPanel::Routes.mixin(self)
+
+  resources :users do
+    collection do
+      get "profile"
+      get "approve_user"
+    end
+  end
+  devise_scope :user do
+    authenticated :user do
+      root 'home#index', as: :root
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

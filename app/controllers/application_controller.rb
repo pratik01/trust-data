@@ -9,6 +9,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+
+  def login_user
+    @user ||= current_user
+  end
+
   def layout_by_resource
     if devise_controller?
       "login"

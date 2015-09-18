@@ -36,6 +36,7 @@ gem 'haml-rails'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'the_role'
+gem 'thin'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

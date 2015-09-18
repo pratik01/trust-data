@@ -1,0 +1,16 @@
+.container
+  %ul.nav.nav-tabs
+    %li.active{:role => "presentation"}
+      %a{:href=>"#hometab" ,"data-toggle"=>"tab"} Home
+    %li{:role => "presentation"}
+      %a{:href=>"#profiletab" ,"data-toggle"=>"tab"} Profile
+  .tab-content.clearfix
+    #hometab.tab-pane.active
+      .h-10{:style=>"height:10px;clear:both;"}
+      .col-md-3
+        %img{:src=>"#{@user.image_url.to_s}"}
+      .col-md-6
+        = @user.email
+    #profiletab.tab-pane
+      = form_for @user do |f|
+        = render :partial => "components/text_box",:locals => {:f=>f,:n=>"firstName",:label=>"First Name"}
