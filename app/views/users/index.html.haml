@@ -1,25 +1,26 @@
 .container
+  .panel.panel-default
+    .panel-heading
+      %h3 Users
+    .panel-body
+      = link_to "All Users", :action => "index"
+      |
+      = link_to "Users awaiting approval", :action => "index", :approved => "false"
 
-  %h1 Users
-
-  = link_to "All Users", :action => "index"
-  |
-  = link_to "Users awaiting approval", :action => "index", :approved => "false"
-
-  %table.table.header-table.table-striped.table-bordered
-    %thead
-      %tr
-        %td Name
-        %td Email
-        %td Contact
-        %td Approved
-        %td Actions
-    - @users.each do |user|
-      %tr
-        %td= user.firstName
-        %td= user.email
-        %td= user.contact1
-        %td= user.approved
-        %td
-          - if user.approved==false
-            %a.btn.btn-sm.btn-info{:href=>"/users/approve_user?id=#{user.id}"}Approve
+      %table.table.header-table.table-striped.table-bordered
+        %thead
+          %tr
+            %td Name
+            %td Email
+            %td Contact
+            %td Approved
+            %td Actions
+        - @users.each do |user|
+          %tr
+            %td= user.firstName
+            %td= user.email
+            %td= user.contact1
+            %td= user.approved
+            %td
+              - if user.approved==false
+                %a.btn.btn-sm.btn-info{:href=>"/users/approve_user?id=#{user.id}"}Approve

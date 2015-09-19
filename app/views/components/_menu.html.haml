@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default
+%nav.navbar.navbar-inverse
   .container
     / Brand and toggle get grouped for better mobile display
     .navbar-header
@@ -18,6 +18,8 @@
           %ul.dropdown-menu
             %li
               %a{:href => "/users"} User
+        %li
+          %a{:href=>"/addresses"} Address Book
       %form.navbar-form.navbar-left{:role => "search"}
         .form-group
           %input.form-control{:placeholder => "Search", :type => "text"}

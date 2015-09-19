@@ -1,5 +1,7 @@
 TrustData::Application.routes.draw do
 
+  resources :addresses
+
   devise_for :users
   TheRoleManagementPanel::Routes.mixin(self)
 
@@ -7,6 +9,7 @@ TrustData::Application.routes.draw do
     collection do
       get "profile"
       get "approve_user"
+      patch "change_password"
     end
   end
   devise_scope :user do

@@ -1,0 +1,35 @@
+= form_for @address do |f|
+  - if @address.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@address.errors.count, "error")} prohibited this address from being saved:"
+      %ul
+        - @address.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    %legend Contact Details
+    .col-md-6
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"name",:label=>"Contact Name"}
+    .col-md-6
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"companyName",:label=>"Company Name"}
+    .col-md-4
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"email",:label=>"Email"}
+    .col-md-4
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"contact1",:label=>"Office No"}
+    .col-md-4
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"contact2",:label=>"Mobile No"}
+  %fieldset
+    %legend Address Info
+    .col-md-12
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"address1",:label=>"Address 1"}
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"address2",:label=>"Address 2"}
+    .col-md-6
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"country",:label=>"Country"}
+    .col-md-6
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"state",:label=>"State"}
+    .col-md-6
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"city",:label=>"City"}
+    .col-md-6
+      = render :partial => "components/text_box",:locals => {:f=>f,:n=>"zip_code",:label=>"Zip Code"}
+    .col-md-12
+      = f.submit 'Save',:class=>"btn btn-primary"

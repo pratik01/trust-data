@@ -1,16 +1,114 @@
 .container
-  %ul.nav.nav-tabs
-    %li.active{:role => "presentation"}
-      %a{:href=>"#hometab" ,"data-toggle"=>"tab"} Home
-    %li{:role => "presentation"}
-      %a{:href=>"#profiletab" ,"data-toggle"=>"tab"} Profile
-  .tab-content.clearfix
-    #hometab.tab-pane.active
-      .h-10{:style=>"height:10px;clear:both;"}
-      .col-md-3
-        %img{:src=>"#{@user.image_url.to_s}"}
-      .col-md-6
-        = @user.email
-    #profiletab.tab-pane
-      = form_for @user do |f|
-        = render :partial => "components/text_box",:locals => {:f=>f,:n=>"firstName",:label=>"First Name"}
+  .panel.panel-default
+    .panel-heading
+      %h3 Profile
+    .panel-body
+      %ul.nav.nav-tabs
+        %li.active{:role => "presentation"}
+          %a{:href=>"#hometab" ,"data-toggle"=>"tab"} Overview
+        %li{:role => "presentation"}
+          %a{:href=>"#settingtab" ,"data-toggle"=>"tab"} Setting
+      .tab-content.clearfix
+        #hometab.tab-pane.active{:style=>"min-height:400px;"}
+          .h-10{:style=>"height:30px;clear:both;"}
+          .col-md-3
+            %img.thumbnail{:src=>"#{@user.image_url(:small).to_s}",:style=>"width:100%;"}
+          .col-md-6
+            %table.table
+              %tr
+                %td Name
+                %td
+                  = @user.firstName+' '+@user.middleName+' '+@user.lastName
+              %tr
+                %td Email
+                %td
+                  = @user.email
+              %tr
+                %td Contact
+                %td
+                  = @user.contact1 + ' , '+ @user.contact2
+          .col-md-12
+            .h-20{:style=>"height:30px;clear:both;"}
+            %table.table
+              %tr
+                %td Address 1
+                %td
+                  =@user.address1
+              %tr
+                %td Address 2
+                %td
+                  =@user.address2
+              %tr
+                %td City
+                %td
+                  =@user.city
+              %tr
+                %td State
+                %td
+                  =@user.state
+              %tr
+                %td Country
+                %td
+                  =@user.country
+              %tr
+                %td Zip Code
+                %td
+                  =@user.zip_code
+        #settingtab.tab-pane{:style=>"background:white;min-height:400px;"}
+          .h-20{:style=>"height:30px;clear:both;"}
+          .col-xs-3{:style=>"background:white;"}
+            %ul.nav.nav-tabs.tabs-left
+              %li.active
+                %a{"data-toggle" => "tab", :href => "#personalinfo"} Personal Info
+              %li
+                %a{"data-toggle" => "tab", :href => "#addressinfotab"} Address Info
+              %li
+                %a{"data-toggle" => "tab", :href => "#changeprofilepictab"} Change Profile
+              %li
+                %a{"data-toggle" => "tab", :href => "#passwordchange"} Change Password
+          .col-xs-9{:style=>"background:white;"}
+            .tab-content
+              #personalinfo.tab-pane.active
+                = form_for @user do |f|
+                  .col-md-4
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"firstName",:label=>"First Name"}
+                  .col-md-4
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"middleName",:label=>"Middle Name"}
+                  .col-md-4
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"lastName",:label=>"Last Name"}
+                  .col-md-6
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"contact1",:label=>"Contact 1"}
+                  .col-md-6
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"contact2",:label=>"Contact 2"}
+                  .col-md-12
+                    %button.btn.btn-primary{:type=>"submit"} Save
+              #addressinfotab.tab-pane
+                = form_for @user do |f|
+                  .col-md-12
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"address1",:label=>"Address 1"}
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"address2",:label=>"Address 2"}
+                  .col-md-6
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"country",:label=>"Country"}
+                  .col-md-6
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"state",:label=>"State"}
+                  .col-md-6
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"city",:label=>"City"}
+                  .col-md-6
+                    = render :partial => "components/text_box",:locals => {:f=>f,:n=>"zip_code",:label=>"Zop Code"}
+                  .col-md-12
+                    %button.btn.btn-primary{:type=>"submit"} Save
+              #changeprofilepictab.tab-pane
+                = form_for @user do |f|
+                  .col-md-12
+                    = f.file_field :image
+                  .col-md-12
+                    .h-20{:style=>"height:20px;"}
+                    %button.btn.btn-primary{:type=>"submit"} Save
+              #passwordchange.tab-pane
+                = form_for(@user, :url => { :action => "change_password" } ) do |f|
+                  .col-md-12
+                    = render :partial => "components/password_field",:locals => {:f=>f,:n=>"current_password",:label=>"Old Password"}
+                    = render :partial => "components/password_field",:locals => {:f=>f,:n=>"password",:label=>"New Password"}
+                    = render :partial => "components/password_field",:locals => {:f=>f,:n=>"password_confirmation",:label=>"Re-Enter Password"}
+                    .h-20{:style=>"height:20px;"}
+                    %button.btn.btn-primary{:type=>"submit"} Save

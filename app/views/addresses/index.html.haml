@@ -1,0 +1,63 @@
+:css
+  .panel-title{
+    font-size: 28px;
+  }
+  .address-block {
+    border-color: #ddd;
+  }
+  .address-default {
+    background-color: #77A8DA;
+  }
+  .addr-block-title {
+    background-color: #f5f5f5;
+      border-color: #ddd;
+        margin: auto 0;
+        text-align: center;
+  }
+  .addr-block-body {
+    padding-left: 35px;
+  }
+  .addr-block-buttons {
+    background-color: #f5f5f5;
+      border-color: #ddd;
+        margin: auto 0;
+        text-align: center;
+      padding: 5px;
+  }
+  .btn-address {
+    color: #fff;
+    background-color: #908484;
+    border-color: #ddd;
+
+  }
+.container
+  .panel.panel-default
+    .panel-heading
+      %h1.panel-title.pull-left
+        Address
+      = link_to 'New Address', new_address_path,:class=>"btn btn-primary pull-right"
+      .clearfix
+    .panel-body
+      - @addresses.each do |address|
+        .address-block.col-lg-4.col-md-4.col-sm-4{:style => "margin-bottom: 30px;"}
+          .panel.panel-default
+            .panel-heading.addr-block-title
+              =address.name
+              %span.label.label-default{:style => "margin-left: 10px;"}
+                = address.companyName
+            .panel-body.address-view.addr-block-body
+              %div 25 White Street
+              %span Beaumaris
+              %span VIC
+              %span 3193
+              %div Australia
+              %div
+                %span P:
+                %span 03 9589 3917
+                %span / M: 0499009310
+              .addr-block-buttons
+                %span
+                  %a.btn.btn-warning.btn-xs{:href => "#", :role => "button"} Edit
+                  %a.btn.btn-danger.btn-xs{:href => "#", :role => "button"} Delete
+              %div
+                %input.btn.btn-sm.btn-address.btn-block{:type => "submit", :value => "Use this Address"}
